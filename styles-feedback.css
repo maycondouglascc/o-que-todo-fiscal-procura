@@ -21,15 +21,13 @@
 .faq-grid>div:first-child{position:sticky;top:28px;align-self:start}
 
 .closing{padding:78px 0 82px;border-top:3px solid var(--gold);background:var(--navy-2)}
-.closing-inner{grid-template-columns:minmax(0,1.05fr) minmax(190px,.62fr) minmax(300px,.9fr);gap:34px}
+.closing-inner{grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:42px}
 .closing h2{font-size:2.65rem;line-height:1.08;max-width:470px}
-.closing-mockup{display:flex;align-items:center;justify-content:center;min-width:0}
-.closing-mockup img{width:100%;max-height:275px;object-fit:contain;filter:drop-shadow(0 18px 19px #00171d66)}
 .closing-purchase{border-left:1px solid #ffffff30;padding-left:28px}
 .closing-purchase>p{margin-top:0!important}
 
-@media(max-width:1050px){.closing-inner{grid-template-columns:1fr .72fr 1fr;gap:24px}.closing-purchase{padding-left:22px}.closing h2{font-size:2.25rem}}
-@media(max-width:767px){.audience-tags{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.audience-tags>span{min-height:54px;padding:12px;font-size:.8125rem}.author-panel{max-width:420px}.faq-grid>div:first-child{position:static}.closing{padding:58px 0 66px}.closing-inner{grid-template-columns:1fr;gap:22px}.closing h2{font-size:2.05rem}.closing-mockup{max-width:390px;justify-self:center}.closing-mockup img{max-height:250px}.closing-purchase{border-left:0;border-top:1px solid #ffffff30;padding:22px 0 0}.closing-purchase>p{margin-bottom:16px!important}}
+@media(max-width:1050px){.closing-inner{grid-template-columns:1fr .9fr;gap:24px}.closing-purchase{padding-left:22px}.closing h2{font-size:2.25rem}}
+@media(max-width:767px){.audience-tags{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.audience-tags>span{min-height:54px;padding:12px;font-size:.8125rem}.author-panel{max-width:420px}.faq-grid>div:first-child{position:static}.closing{padding:58px 0 66px}.closing-inner{grid-template-columns:1fr;gap:22px}.closing h2{font-size:2.05rem}.closing-purchase{border-left:0;border-top:1px solid #ffffff30;padding:22px 0 0}.closing-purchase>p{margin-bottom:16px!important}}
 @media(max-width:430px){.audience-tags{grid-template-columns:1fr}}
 
 /* Final feedback adjustments: uniform proof cards and widow control. */
