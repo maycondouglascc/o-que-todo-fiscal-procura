@@ -35,6 +35,8 @@ if re.search(r'\[A CONFIRMAR\]|Adicionar página', html, re.I):
     raise SystemExit('Unresolved placeholder found in index.html')
 if 'eyebrow' in html.lower() or 'eyebrown' in html.lower():
     raise SystemExit('Eyebrow label found in index.html')
+if re.search(r'página real do arquivo|pagina real do arquivo', html, re.I):
+    raise SystemExit('Internal proof label found in index.html')
 if '—' in html or '–' in html:
     raise SystemExit('Forbidden dash found in index.html')
 print(f'Page preflight passed: {len(parser.images)} images resolved.')

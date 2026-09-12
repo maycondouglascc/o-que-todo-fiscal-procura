@@ -5,6 +5,13 @@
   const allowed = key => /^utm_(source|medium|campaign|term|content|id|source_platform|creative_format|marketing_tactic)$/.test(key) || ['fbclid', 'gclid', '_gl'].includes(key);
   const attribution = {};
   params.forEach((value, key) => { if (allowed(key)) attribution[key] = value; });
+  const trackMeta = (event, detail = {}) => {
+    if (typeof window.fbq === 'function') window.fbq('track', event, {
+      content_ids: [productId],
+      content_type: 'product',
+      ...detail
+    });
+  };
   // Local instrumentation only. No ad or analytics service is configured without verified IDs.
   window.dataLayer = window.dataLayer || [];
   function emit(event, detail = {}) {
@@ -18,7 +25,6 @@
   }
   const audienceVariant = params.get('publico') === 'contadores' ? 'contadores' : 'prestadores';
   if (audienceVariant === 'contadores') {
-    document.querySelector('.hero .eyebrow').lastChild.textContent = ' PARA QUEM ORIENTA A EMISSÃO DE NFS-e';
     document.getElementById('hero-description').textContent = 'Uma referência para orientar seus clientes sobre erros de emissão, cuidados cadastrais e revisão mensal das notas fiscais de serviço.';
   }
   const authorityVariant = params.get('autoridade') === 'secao' ? 'secao' : 'resumida';
@@ -33,6 +39,7 @@
     const trackCheckoutClick = () => {
       emit('CTA_Click', { cta_location: link.dataset.cta, ...variants });
       emit('CheckoutOutbound', { cta_location: link.dataset.cta, checkout_url: destination.origin + destination.pathname, ...variants });
+      trackMeta('InitiateCheckout', { cta_location: link.dataset.cta, value: 47, currency: 'BRL' });
     };
     link.addEventListener('click', trackCheckoutClick);
     link.addEventListener('auxclick', event => { if (event.button === 1) trackCheckoutClick(); });
