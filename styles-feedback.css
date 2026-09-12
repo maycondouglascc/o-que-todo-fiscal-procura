@@ -31,3 +31,16 @@
 @media(max-width:1050px){.closing-inner{grid-template-columns:1fr .72fr 1fr;gap:24px}.closing-purchase{padding-left:22px}.closing h2{font-size:2.25rem}}
 @media(max-width:767px){.audience-tags{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.audience-tags>span{min-height:54px;padding:12px;font-size:.8125rem}.author-panel{max-width:420px}.faq-grid>div:first-child{position:static}.closing{padding:58px 0 66px}.closing-inner{grid-template-columns:1fr;gap:22px}.closing h2{font-size:2.05rem}.closing-mockup{max-width:390px;justify-self:center}.closing-mockup img{max-height:250px}.closing-purchase{border-left:0;border-top:1px solid #ffffff30;padding:22px 0 0}.closing-purchase>p{margin-bottom:16px!important}}
 @media(max-width:430px){.audience-tags{grid-template-columns:1fr}}
+
+/* Final feedback adjustments: uniform proof cards and widow control. */
+h1,h2,h3,p,li,summary{ text-wrap:pretty }
+h1,h2,h3{ text-wrap:balance }
+.proof-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.78fr);align-items:end;gap:32px}
+.proof-intro h2 span{display:inline-block;font-size:1.45rem;line-height:1.15;letter-spacing:-.45px;margin-top:7px}
+.material-proof-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.material-proof-card{display:flex;flex-direction:column;height:100%}
+.material-proof-card:nth-child(3){margin-top:0}
+.proof-art{flex:none}
+.cover-shell{aspect-ratio:2/3}
+.proof-copy{flex:1}
+@media(max-width:767px){.proof-intro{display:block}.proof-intro h2 span{font-size:1.18rem}.material-proof-grid{grid-template-columns:1fr}.material-proof-card{height:auto}}
