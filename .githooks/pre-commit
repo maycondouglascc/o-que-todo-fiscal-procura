@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Keep commits complete and safe for this static landing page.
+# The hook stages the full working tree because this project is intentionally
+# delivered as one auditable page plus its local assets.
+git add -A
+
+node --check app.js
+
+python3 - <<'PY'
+from html.parser import HTMLParser
+from pathlib import Path
+import re
+
+root = Path('.')
+html = (root / 'index.html').read_text(encoding='utf-8')
+
+class PageParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.images = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'img' and attrs.get('src'):
+            self.images.append(attrs['src'])
+
+parser = PageParser()
+parser.feed(html)
+missing = [src for src in parser.images if src.startswith('./') and not (root / src[2:]).exists()]
+if missing:
+    raise SystemExit(f'Missing local images: {missing}')
+if re.search(r'\[A CONFIRMAR\]|Adicionar página', html, re.I):
+    raise SystemExit('Unresolved placeholder found in index.html')
+if 'eyebrow' in html.lower() or 'eyebrown' in html.lower():
+    raise SystemExit('Eyebrow label found in index.html')
+if '—' in html or '–' in html:
+    raise SystemExit('Forbidden dash found in index.html')
+print(f'Page preflight passed: {len(parser.images)} images resolved.')
+PY
+
+python3 growth-council/run_council.py verdict >/dev/null
+echo "Growth Council contract passed."
