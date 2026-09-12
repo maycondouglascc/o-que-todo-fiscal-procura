@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Growth Council recommendation",
+  "type": "object",
+  "required": ["recommendation", "priority", "impact", "confidence", "effort", "evidence", "owner"],
+  "properties": {
+    "recommendation": {"type": "string"},
+    "priority": {"enum": ["P0", "P1", "P2", "P3"]},
+    "impact": {"type": "integer", "minimum": 1, "maximum": 5},
+    "confidence": {"type": "integer", "minimum": 1, "maximum": 5},
+    "effort": {"type": "integer", "minimum": 1, "maximum": 5},
+    "evidence": {"enum": ["FACT", "DATA", "RESEARCH", "INFERENCE", "ASSUMPTION"]},
+    "owner": {"enum": ["Market", "Offer", "Funnel", "Copy", "Creative", "UX", "Persuasion", "Experimentation", "Chair"]}
+  },
+  "additionalProperties": false
+}

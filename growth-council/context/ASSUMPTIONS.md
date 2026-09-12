@@ -1,0 +1,11 @@
+# Assumption Register
+
+| ID | Assumption | Importance (1-5) | Risk if wrong | Evidence needed | How to validate | Priority |
+|---|---|---:|---|---|---|---|
+| A-001 | MEIs e prestadores de serviço que emitem NFS-e por conta própria são o ICP primário mais promissor. | 5 | Copy e tráfego podem falar com o comprador errado. | Entrevistas, origem do tráfego e conversão por segmento. | Entrevistar 5–10 compradores/prospects e testar landing segmentada. | P0 |
+| A-002 | O material final realmente contém as entregas, bônus e checklist descritos. | 5 | A promessa pode estar maior que o produto entregue. | Os três PDFs fornecidos confirmam as entregas e o checklist do guia principal; canal de entrega e edição comercial ainda faltam. | QA do pacote de entrega antes do tráfego; confirmar que os arquivos publicados são os mesmos. | P0 — partially resolved by E-012–E-014 |
+| A-003 | Credenciais, preço, parcelamento, acesso e garantia exibidos na página correspondem ao checkout e podem ser comprovados. | 5 | Perda de confiança, reclamação ou risco regulatório. | Checkout, documentos e política do negócio. | Conferência manual e autorização do autor. | P0 |
+| A-004 | A ausência de prova é o principal limitador de conversão, mais que o preço. | 4 | Esforço pode ser investido na mensagem errada. | CVR, entrevistas, gravações e teste de amostras. | Testar prova real antes de reprecificar. | P1 |
+| A-005 | Um order bump e upsell coerentes podem elevar AOV sem prejudicar conversão do front-end. | 4 | Economia de mídia pode ficar inviável ou a oferta mais confusa. | Custos, take rate e dados do checkout. | Teste sequencial após baseline do core offer. | P1 |
+| A-006 | A página é staging enquanto `noindex,nofollow` permanece ativo. | 3 | Tráfego orgânico pode ser bloqueado quando a página for pública. | Decisão de publicação/SEO. | Confirmar ambiente e revisar meta tags no lançamento. | P1 |
+| A-007 | Os dois assets fornecidos podem ser publicados como retratos de Ivan Gonçalves. | 3 | Uso incorreto de imagem ou identidade. | Contexto/autorização do titular. | User supplied and authorized use for this implementation; retain a formal authorization record for public launch. | P1 — resolved for this implementation; formal record recommended |

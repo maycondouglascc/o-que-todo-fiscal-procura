@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Growth Council claim",
+  "type": "object",
+  "required": ["id", "type", "text", "confidence"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^C-[0-9]{3,}$"},
+    "type": {"enum": ["FACT", "DATA", "CUSTOMER EVIDENCE", "INFERENCE", "ASSUMPTION", "OPINION", "HYPOTHESIS"]},
+    "text": {"type": "string", "minLength": 1},
+    "evidence_ids": {"type": "array", "items": {"type": "string", "pattern": "^E-[0-9]{3,}$"}},
+    "confidence": {"type": "integer", "minimum": 0, "maximum": 100}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Growth Council input manifest",
+  "type": "object",
+  "required": ["product", "goals", "constraints"],
+  "properties": {
+    "product": {"type": "string", "minLength": 1},
+    "goals": {"type": "array", "items": {"type": "string"}},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "metrics": {"type": "object", "additionalProperties": {"type": ["number", "string", "null"]}}
+  },
+  "additionalProperties": true
+}

@@ -14,7 +14,7 @@
   }
   const headlineVariant = params.get('headline') === 'controle' ? 'controle' : 'seguranca';
   if (headlineVariant === 'controle') {
-    document.getElementById('hero-title').textContent = 'Identifique os erros que mais chamam atenção da fiscalização antes que virem pendências, juros ou multas.';
+    document.getElementById('hero-title').textContent = 'Confira os pontos essenciais da sua NFS-e antes de enviá-la.';
   }
   const audienceVariant = params.get('publico') === 'contadores' ? 'contadores' : 'prestadores';
   if (audienceVariant === 'contadores') {
@@ -30,9 +30,36 @@
     const destination = new URL(link.href);
     Object.entries(attribution).forEach(([key, value]) => destination.searchParams.set(key, value));
     link.href = destination.toString();
-    link.addEventListener('click', () => emit('CTA_Click', { cta_location: link.dataset.cta, ...variants }));
-    link.addEventListener('auxclick', event => { if (event.button === 1) emit('CTA_Click', { cta_location: link.dataset.cta, ...variants }); });
+    const trackCheckoutClick = () => {
+      emit('CTA_Click', { cta_location: link.dataset.cta, ...variants });
+      emit('CheckoutOutbound', { cta_location: link.dataset.cta, checkout_url: destination.origin + destination.pathname, ...variants });
+    };
+    link.addEventListener('click', trackCheckoutClick);
+    link.addEventListener('auxclick', event => { if (event.button === 1) trackCheckoutClick(); });
   });
+  // The payment provider remains the source of truth for approval. A verified
+  // checkout integration can call this hook after approval; clicks never emit Purchase.
+  window.growthCouncil = window.growthCouncil || {};
+  const recordedPurchaseIds = new Set();
+  window.growthCouncil.recordApprovedPurchase = (details = {}) => {
+    const transactionId = details.transaction_id;
+    if (transactionId && recordedPurchaseIds.has(transactionId)) return false;
+    if (transactionId) recordedPurchaseIds.add(transactionId);
+    emit('Purchase', { ...details, ...variants });
+    return true;
+  };
+  // Optional return bridge: configure the provider to redirect here only after
+  // approval, with gc_purchase=approved and its own transaction_id/value/currency.
+  // Without a provider-issued transaction_id this path remains inert.
+  if (params.get('gc_purchase') === 'approved' && params.get('transaction_id')) {
+    const value = Number(params.get('value'));
+    window.growthCouncil.recordApprovedPurchase({
+      transaction_id: params.get('transaction_id'),
+      ...(Number.isFinite(value) ? { value } : {}),
+      currency: params.get('currency') || 'BRL',
+      source: params.get('source') || 'checkout'
+    });
+  }
   // InitiateCheckout belongs on the real checkout load. Purchase only after payment approval.
   // Never equate an outbound click, payment-method selection, or generated PIX with a purchase.
   const sticky = document.getElementById('sticky-buy');

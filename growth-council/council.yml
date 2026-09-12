@@ -1,0 +1,51 @@
+version: 1
+name: Growth Council
+language: pt-BR
+commands:
+  analyze: [intake, round-1, specialists, debate, cross-examination, verdict]
+  offer: [intake, market-strategist, offer-architect]
+  landing-page: [intake, market-strategist, offer-architect, funnel-economist, conversion-copywriter, creative-director, ux-cro-designer, persuasion-auditor, experimentation-judge, verdict]
+  audit: [intake, round-1, ux-cro-designer, persuasion-auditor, experimentation-judge, verdict]
+  debate: [debate]
+  experiment: [experiment]
+  verdict: [verdict]
+  red-team: [red-team]
+  critique: [critique]
+agents:
+  - id: market-strategist
+    name: Market Strategist
+    inputs: [PROJECT_CONTEXT.md]
+    outputs: [MARKET_BRIEF.md]
+  - id: offer-architect
+    name: Offer Architect
+    inputs: [PROJECT_CONTEXT.md, MARKET_BRIEF.md]
+    outputs: [OFFER_BRIEF.md]
+  - id: funnel-economist
+    name: Funnel Economist
+    inputs: [PROJECT_CONTEXT.md, MARKET_BRIEF.md, OFFER_BRIEF.md]
+    outputs: [FUNNEL_MODEL.md]
+  - id: conversion-copywriter
+    name: Conversion Copywriter
+    inputs: [PROJECT_CONTEXT.md, MARKET_BRIEF.md, OFFER_BRIEF.md, FUNNEL_MODEL.md]
+    outputs: [MESSAGING_STRATEGY.md, LANDING_PAGE_COPY.md]
+  - id: creative-director
+    name: Creative Director
+    inputs: [MARKET_BRIEF.md, OFFER_BRIEF.md, MESSAGING_STRATEGY.md, LANDING_PAGE_COPY.md]
+    outputs: [CREATIVE_DIRECTION.md]
+  - id: ux-cro-designer
+    name: UX/CRO Designer
+    inputs: [PROJECT_CONTEXT.md, MARKET_BRIEF.md, OFFER_BRIEF.md, FUNNEL_MODEL.md, MESSAGING_STRATEGY.md, LANDING_PAGE_COPY.md, CREATIVE_DIRECTION.md]
+    outputs: [LANDING_PAGE_ARCHITECTURE.md, UX_CRO_AUDIT.md]
+  - id: persuasion-auditor
+    name: Persuasion Auditor
+    inputs: [PROJECT_CONTEXT.md, OFFER_BRIEF.md, LANDING_PAGE_COPY.md, CREATIVE_DIRECTION.md, UX_CRO_AUDIT.md]
+    outputs: [PERSUASION_AUDIT.md]
+  - id: experimentation-judge
+    name: Experimentation Judge
+    inputs: [PROJECT_CONTEXT.md, MARKET_BRIEF.md, OFFER_BRIEF.md, FUNNEL_MODEL.md, MESSAGING_STRATEGY.md, LANDING_PAGE_COPY.md, UX_CRO_AUDIT.md, PERSUASION_AUDIT.md]
+    outputs: [EXPERIMENT_PLAN.md]
+  - id: council-chair
+    name: Growth Council Chair
+    inputs: [all]
+    outputs: [COUNCIL_DEBATE.md, CROSS_EXAMINATION.md, FINAL_VERDICT.md]
+states: [INTAKE, DIAGNOSIS, SPECIALIST_OUTPUTS, DEBATE, CROSS_EXAMINATION, VERDICT, RED_TEAM, CRITIQUE]
