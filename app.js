@@ -28,7 +28,8 @@
     document.getElementById('hero-description').textContent = 'Uma referência para orientar seus clientes sobre erros de emissão, cuidados cadastrais e revisão mensal das notas fiscais de serviço.';
   }
   const authorityVariant = params.get('autoridade') === 'secao' ? 'secao' : 'resumida';
-  if (authorityVariant === 'secao') document.querySelector('.author-mini').hidden = true;
+  const authorMini = document.querySelector('.author-mini');
+  if (authorityVariant === 'secao' && authorMini) authorMini.hidden = true;
   const variants = { headline_variant: headlineVariant, audience_variant: audienceVariant, authority_variant: authorityVariant };
   emit('PageView', variants);
   emit('ViewContent', variants);
